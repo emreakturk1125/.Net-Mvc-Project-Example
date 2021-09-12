@@ -1,0 +1,43 @@
+﻿@using MvcProject.Entity.Concrete
+@model List<Category>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetCategoryList</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h3>Mvc Kamp Tablo Örneği</h3>
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Adı</th>
+            <th>Açıklama</th>
+            <th>Durumu</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CategoryId</td>
+                <td>@item.CategoryName</td>
+                <td>@item.CategoryDescription</td>
+                <td>@item.CategoryStatus</td>
+                <td>
+                    <button class="btn btn-success">Güncelle</button>
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    <a href="/Category/AddCategory" class="btn btn-info">Yeni Kategori</a>
+</body>
+</html>
