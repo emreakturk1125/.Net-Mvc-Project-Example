@@ -1,5 +1,5 @@
 # .Net-Mvc-Project-Example
-Katmanlı Mimari, Admin Panel, Yazar Sitesi
+Admin Panel, Writer Sites
 
 Education : Murat Yücedağ Udemy
 
