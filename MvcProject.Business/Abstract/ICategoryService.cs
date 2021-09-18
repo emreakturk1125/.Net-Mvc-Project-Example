@@ -11,8 +11,8 @@ namespace MvcProject.Business.Abstract
     {
         List<Category> GetCategoryListBL();
         void CategoryAddBL(Category item);
-        Category GetCategoryByIdBL(int id);
-        Category GetCategoryByNameBL(string name);
+        Category GetCategoryByIdBL(int categoryId);
+        Category GetCategoryByNameBL(string categoryName);
         void CategoryDeleteBL(Category item);
         void CategoryUpdateBL(Category item);
     }

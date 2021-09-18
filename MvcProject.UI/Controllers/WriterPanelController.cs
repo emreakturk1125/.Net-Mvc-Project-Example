@@ -9,19 +9,29 @@ using System.Web.Mvc;
 
 namespace MvcProject.UI.Controllers
 {
-    public class HeadingController : Controller
+    public class WriterPanelController : Controller
     {
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
         WriterManager wm = new WriterManager(new EfWriterDal());
-        public ActionResult Index()
+
+        // GET: WriterPanel
+        public ActionResult WriterProfile()
         {
-            var headingValues = hm.GetHeadingListBL();
-            return View(headingValues);
+            return View();
         }
 
         [HttpGet]
-        public ActionResult AddHeading()
+        public ActionResult MyHeading()
+        {
+            string param = (string)Session["WriterMail"];
+            int writerId = wm.GetWriterByEmailBL(param).WriterId;
+            var values = hm.GetHeadingListByWriterIdBL(writerId);
+            return View(values);
+        }
+
+        [HttpGet]
+        public ActionResult NewHeading()
         {
             List<SelectListItem> valueCategory = (from x in cm.GetCategoryListBL()
                                                   select new SelectListItem
@@ -29,23 +39,23 @@ namespace MvcProject.UI.Controllers
                                                       Text = x.CategoryName,
                                                       Value = x.CategoryId.ToString()
                                                   }).ToList();
-            List<SelectListItem> valueWriter = (from x in wm.GetWriterListBL()
-                                                select new SelectListItem
-                                                {
-                                                    Text = x.WriterName + " " + x.WriterSurname,
-                                                    Value = x.WriterId.ToString()
-                                                }).ToList();
             ViewBag.vlc = valueCategory;
-            ViewBag.vlw = valueWriter;
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddHeading(Heading item)
+        public ActionResult NewHeading(Heading item)
         {
+            string param = (string)Session["WriterMail"];
+            int writerId = wm.GetWriterByEmailBL(param).WriterId;
+
             item.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            item.HeadingStatus = true;
+            if (String.IsNullOrEmpty(writerId.ToString()))
+                item.WriterId = writerId;
+
             hm.HeadingAddBL(item);
-            return RedirectToAction("Index");
+            return RedirectToAction("MyHeading");
         }
 
         [HttpGet]
@@ -67,8 +77,9 @@ namespace MvcProject.UI.Controllers
         [HttpPost]
         public ActionResult EditHeading(Heading item)
         {
+            item.HeadingStatus = true;
             hm.HeadingUpdate(item);
-            return RedirectToAction("Index");
+            return RedirectToAction("MyHeading");
         }
 
         public ActionResult DeleteHeading(int id)
@@ -76,9 +87,7 @@ namespace MvcProject.UI.Controllers
             var headingValue = hm.GetHeadingByIdBL(id);
             headingValue.HeadingStatus = false;
             hm.HeadingDelete(headingValue);
-            return RedirectToAction("Index");
+            return RedirectToAction("MyHeading");
         }
-
-
     }
 }

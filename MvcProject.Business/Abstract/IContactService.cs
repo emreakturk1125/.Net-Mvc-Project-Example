@@ -9,9 +9,9 @@ namespace MvcProject.Business.Abstract
 {
     public interface IContactService
     {
-        List<Contact> GetContactListBL();
+        List<Contact> GetContactListBL(); 
         void ContactAddBL(Contact item);
-        Contact GetContactByIdBL(int id);
+        Contact GetContactByIdBL(int ContactId);
         void ContactDeleteBL(Contact item);
         void ContactUpdateBL(Contact item);
     }

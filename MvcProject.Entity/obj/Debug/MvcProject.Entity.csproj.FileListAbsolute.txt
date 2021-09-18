@@ -9,7 +9,6 @@ C:\Users\aktur\source\repos\MvcProjectExample\MvcProject.Entity\obj\Debug\MvcPro
 C:\Users\aktur\source\repos\MvcProjectExample\MvcProject.Entity\obj\Debug\MvcProject.Entity.csproj.CopyComplete
 C:\Users\aktur\source\repos\MvcProjectExample\MvcProject.Entity\obj\Debug\MvcProject.Entity.dll
 C:\Users\aktur\source\repos\MvcProjectExample\MvcProject.Entity\obj\Debug\MvcProject.Entity.pdb
-C:\Users\aktur\source\repos\MvcProjectExample\MvcProject.Entity\obj\Debug\MvcProject.Entity.csprojAssemblyReference.cache
 C:\Users\aktur\source\repos\MvcProjectExample\MvcProject.Entity\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Users\aktur\source\repos\MvcProjectExample\MvcProject.Entity\bin\Debug\System.Web.Helpers.dll
 C:\Users\aktur\source\repos\MvcProjectExample\MvcProject.Entity\bin\Debug\System.Web.Mvc.dll

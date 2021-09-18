@@ -13,7 +13,8 @@ namespace MvcProject.Business.Abstract
         void WriterAddBL(Writer item);
         void WriterDeleteBL(Writer item);
         void WriterUpdateBL(Writer item);
-        Writer GetbyIdBL(int id);
-
+        Writer GetWriterByIdBL(int writerId);
+        Writer GetWriterBL(Writer item);
+        Writer GetWriterByEmailBL(string email);
     }
 }

@@ -1,10 +1,9 @@
 ﻿@using MvcProject.Entity.Concrete
 
 @model List<Heading>
-
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "MyHeading";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
 
 @{
@@ -42,7 +41,7 @@
                     </button>
                 </div>
             </div>
-            <a href="/Heading/AddHeading/" class="btn btn-success">
+            <a href="/WriterPanel/NewHeading/" class="btn btn-success">
                 <i class="fas fa-plus"></i> Yeni Başlık
             </a>
 
@@ -122,7 +121,7 @@
                                 </td>
                                 <td>
                                     <span class="@statusColor"> @(item.HeadingStatus ? "Aktif":"Pasif")</span>
-</td>
+                                </td>
                                 <td class="project-state">
                                     <span class="@categoryColor">@item.Category.CategoryName</span>
                                 </td>
@@ -132,12 +131,12 @@
                                         </i>
                                         Yazılar
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/Heading/EditHeading/@item.HeadingId">
+                                    <a class="btn btn-info btn-sm" href="/WriterPanel/EditHeading/@item.HeadingId">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Düzenle
                                     </a>
-                                    <a class="btn btn-danger btn-sm" href="/Heading/DeleteHeading/@item.HeadingId">
+                                    <a class="btn btn-danger btn-sm" href="/WriterPanel/DeleteHeading/@item.HeadingId">
                                         <i class="fas fa-trash">
                                         </i>
                                         Sil
@@ -158,4 +157,4 @@
 
 
 
- 
+

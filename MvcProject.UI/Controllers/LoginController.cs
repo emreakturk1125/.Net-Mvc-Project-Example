@@ -12,9 +12,11 @@ using System.Web.Security;
 
 namespace MvcProject.UI.Controllers
 {
+    [AllowAnonymous] // Uygulama bazındaki kontrollerden muaf etmek için kullanılır
     public class LoginController : Controller
     {
         AdminManager am = new AdminManager(new EfAdminDal());
+        WriterManager wm = new WriterManager(new EfWriterDal());
 
         [HttpGet]
         public ActionResult Index()
@@ -35,7 +37,7 @@ namespace MvcProject.UI.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(adminUserInfo.AdminUsername, false);
                     Session["AdminUsername"] = adminUserInfo.AdminUsername;
-                    return RedirectToAction("Index","AdminCategory");
+                    return RedirectToAction("Index", "AdminCategory");
 
                 }
                 else
@@ -51,8 +53,33 @@ namespace MvcProject.UI.Controllers
                 }
             }
 
-             
+
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult WriterLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult WriterLogin(Writer item)
+        {
+
+            var writerInfo = wm.GetWriterBL(item);
+            if (writerInfo != null)
+            {
+                FormsAuthentication.SetAuthCookie(writerInfo.WriterMail, false);
+                Session["WriterMail"] = writerInfo.WriterMail;
+                return RedirectToAction("MyContent", "WriterPanelContent");
+
+            }
+            else
+            {
+                return RedirectToAction("WriterLogin");
+            }
+             
         }
     }
 }

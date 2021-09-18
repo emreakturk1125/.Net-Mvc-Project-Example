@@ -10,8 +10,9 @@ namespace MvcProject.Business.Abstract
     public interface IHeadingService
     {
         List<Heading> GetHeadingListBL();
+        List<Heading> GetHeadingListByWriterIdBL(int writerId);
         void HeadingAddBL(Heading item);
-        Heading GetbyIdBL(int id);
+        Heading GetHeadingByIdBL(int headingId);
         void HeadingDelete(Heading item);
         void HeadingUpdate(Heading item);
     }

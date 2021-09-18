@@ -17,9 +17,9 @@ namespace MvcProject.Business.Concrete
         {
             _messageDal = messageDal;
         }
-        public Message GetMessageByIdBL(int id)
+        public Message GetMessageByIdBL(int messageId)
         {
-            return _messageDal.Get(x => x.MessageId == id);
+            return _messageDal.Get(x => x.MessageId == messageId);
         }
 
         public List<Message> GetMessageDraftListBL()

@@ -32,7 +32,7 @@ namespace MvcProject.Business.Concrete
             throw new NotImplementedException();
         }
 
-        public Content GetContentByIdBL(int id)
+        public Content GetContentByIdBL(int contentId)
         {
             throw new NotImplementedException();
         }
@@ -42,9 +42,14 @@ namespace MvcProject.Business.Concrete
             throw new NotImplementedException();
         }
 
-        public List<Content> GetContentListByHeadingIdBL(int id)
+        public List<Content> GetContentListByHeadingIdBL(int headingId)
         {
-            return _contentDal.List(x => x.HeadingId == id);
+            return _contentDal.List(x => x.HeadingId == headingId);
+        }
+
+        public List<Content> GetContentListByWriterIdBL(int writerId)
+        {
+            return _contentDal.List(x => x.WriterId == writerId);
         }
     }
 }

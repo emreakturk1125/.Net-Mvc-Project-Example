@@ -32,14 +32,15 @@ namespace MvcProject.Business.Concrete
             _contactDal.Update(item);
         }
 
-        public Contact GetContactByIdBL(int id)
+        public Contact GetContactByIdBL(int contactId)
         {
-           return _contactDal.Get(x => x.ContactId == id);
+           return _contactDal.Get(x => x.ContactId == contactId);
         }
 
         public List<Contact> GetContactListBL()
         {
             return _contactDal.List();
         }
+         
     }
 }

@@ -13,7 +13,7 @@ namespace MvcProject.Business.Abstract
         List<Message> GetMessageSendListBL();
         List<Message> GetMessageDraftListBL();
         void MessageAddBL(Message item);
-        Message GetMessageByIdBL(int id);
+        Message GetMessageByIdBL(int messageId);
         void MessageDeleteBL(Message item);
         void MessageUpdateBL(Message item);
     }

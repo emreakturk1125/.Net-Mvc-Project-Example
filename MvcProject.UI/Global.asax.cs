@@ -12,6 +12,7 @@ namespace MvcProject.UI
     {
         protected void Application_Start()
         {
+            GlobalFilters.Filters.Add(new AuthorizeAttribute()); // Authorize işlemi proje seviyesine çıkmış olacak
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

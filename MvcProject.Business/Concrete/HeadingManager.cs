@@ -17,14 +17,19 @@ namespace MvcProject.Business.Concrete
             _headingDal = headingDal;
         }
 
-        public Heading GetbyIdBL(int id)
+        public Heading GetHeadingByIdBL(int headingId)
         {
-            return _headingDal.Get(x => x.HeadingId == id);
+            return _headingDal.Get(x => x.HeadingId == headingId);
         }
 
         public List<Heading> GetHeadingListBL()
         {
            return  _headingDal.List();
+        }
+
+        public List<Heading> GetHeadingListByWriterIdBL(int writerId)
+        {
+            return _headingDal.List(x => x.WriterId == writerId && x.HeadingStatus == true);
         }
 
         public void HeadingAddBL(Heading item)

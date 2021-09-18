@@ -51,7 +51,7 @@ namespace MvcProject.UI.Controllers
         [HttpGet]
         public ActionResult EditWriter(int id)
         {
-            var writeValue = wm.GetbyIdBL(id);
+            var writeValue = wm.GetWriterByIdBL(id);
             return View(writeValue);
         }
 

@@ -33,9 +33,9 @@ namespace MvcProject.Business.Concrete
             _aboutDal.Update(item);
         }
 
-        public About GetAboutByIdBL(int id)
+        public About GetAboutByIdBL(int aboutId)
         {
-            return _aboutDal.Get(x => x.AboutId == id);
+            return _aboutDal.Get(x => x.AboutId == aboutId);
         }
 
         public List<About> GetAboutListBL()

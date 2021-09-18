@@ -34,14 +34,14 @@ namespace MvcProject.Business.Concrete
             _categoryDal.Update(item);
         }
 
-        public Category GetCategoryByIdBL(int id)
+        public Category GetCategoryByIdBL(int categoryId)
         {
-            return _categoryDal.Get(x => x.CategoryId == id);
+            return _categoryDal.Get(x => x.CategoryId == categoryId);
         }
 
-        public Category GetCategoryByNameBL(string name)
+        public Category GetCategoryByNameBL(string categoryName)
         {
-            return _categoryDal.Get(x => x.CategoryName.ToLower() == name.ToLower());
+            return _categoryDal.Get(x => x.CategoryName.ToLower() == categoryName.ToLower());
         }
 
         public List<Category> GetCategoryListBL()

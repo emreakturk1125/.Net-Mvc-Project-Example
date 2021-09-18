@@ -22,6 +22,7 @@ namespace MvcProject.UI.Controllers
 
         public ActionResult GetContactDetails(int id)
         {
+
             var contactValue = cm.GetContactByIdBL(id);
             return View(contactValue);
         }

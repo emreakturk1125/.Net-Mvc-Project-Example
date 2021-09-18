@@ -11,7 +11,7 @@ namespace MvcProject.Business.Abstract
     {
         List<About> GetAboutListBL();
         void AboutAddBL(About item);
-        About GetAboutByIdBL(int id);
+        About GetAboutByIdBL(int aboutId);
         void AboutDeleteBL(About item);
         void AboutUpdateBL(About item);
     }
