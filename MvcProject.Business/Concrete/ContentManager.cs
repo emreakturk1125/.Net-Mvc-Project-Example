@@ -19,7 +19,7 @@ namespace MvcProject.Business.Concrete
 
         public void ContentAddBL(Content item)
         {
-            throw new NotImplementedException();
+            _contentDal.Insert(item);
         }
 
         public void ContentDeleteBL(Content item)
@@ -39,7 +39,7 @@ namespace MvcProject.Business.Concrete
 
         public List<Content> GetContentListBL()
         {
-            throw new NotImplementedException();
+            return _contentDal.List();
         }
 
         public List<Content> GetContentListByHeadingIdBL(int headingId)

@@ -17,8 +17,34 @@ namespace MvcProject.UI.Controllers
         {
             string param = (string)Session["WriterMail"];
             int writerId = wm.GetWriterByEmailBL(param).WriterId;
+
             var contentListValue = cm.GetContentListByWriterIdBL(writerId);
             return View(contentListValue);
+        }
+
+        [HttpGet]
+        public ActionResult AddContent(int id)
+        {
+            ViewBag.HeadingId = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddContent(Content item)
+        {
+            string param = (string)Session["WriterMail"];
+            int writerId = wm.GetWriterByEmailBL(param).WriterId;
+
+            item.ContentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            item.WriterId = writerId;
+            item.ContentStatus = true;
+            cm.ContentAddBL(item);
+            return RedirectToAction("MyContent");
+        }
+         
+        public ActionResult ToDoList(Content item)
+        { 
+            return View();
         }
     }
 }

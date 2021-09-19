@@ -1,4 +1,6 @@
-﻿
+﻿@using MvcProject.Entity.Concrete
+@model List<Heading>
+
 @{
     Layout = null;
 }
@@ -51,75 +53,24 @@ to get the desired effect
                         <img src="~/AdminLTE-3.0.4/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Yazar Paneli</a>
+                        <a href="#" class="d-block">Başlıklar</a>
                     </div>
                 </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="/AdminCategory/Index/" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Profilim
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/WriterPanel/MyHeading/" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Başlıklarım
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/WriterPanel/AllHeading/" class="nav-link">
-                                <i class="nav-icon fas list-group"></i>
-                                <p>
-                                    Tüm Başlıklar
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="/WriterPanelMessage/Sendbox/" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>
-                                    Mesajlar
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/WriterPanelContent/MyContent/" class="nav-link">
-                                <i class="nav-icon fas fa-calendar-alt"></i>
-                                <p>
-                                    Yazılarım
-                                    <span class="badge badge-info right">2</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="/Default/Headings/" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Siteye Git
-                                    <i class="fas fa-angle-left right"></i>
+                        @foreach (var item in Model)
+                        {
+                            <li class="nav-item">
+                                <a href="/Default/Headings/@item.HeadingId" class="nav-link">
+                                    <p>
+                                        @item.HeadingName 
+                                    </p>
+                                </a>
+                            </li>
 
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="/Login/LogOut/" class="nav-link">
-                                <i class="nav-icon fas fa-envelope"></i>
-                                <p>
-                                    Çıkış Yap
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
+                        }
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -129,10 +80,11 @@ to get the desired effect
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            @Html.Action("Index","Default")
             <!-- Main content -->
             <div class="content">
 
-                @RenderBody()
+                @*@RenderBody()*@
 
             </div>
             <!-- /.content -->

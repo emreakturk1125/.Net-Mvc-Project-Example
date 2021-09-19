@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 
 namespace MvcProject.UI.Controllers
 {
@@ -89,5 +91,15 @@ namespace MvcProject.UI.Controllers
             hm.HeadingDelete(headingValue);
             return RedirectToAction("MyHeading");
         }
+
+        // Paging İşlemi için NuGet den PagedList ve PagedList.Mvc kütüphaneleri proje referanslarına eklenir.
+
+        public ActionResult AllHeading(int param = 1)
+        {
+            var headingList = hm.GetHeadingListBL().ToPagedList(param,2);
+            return View(headingList);
+
+        }
+
     }
 }

@@ -81,5 +81,13 @@ namespace MvcProject.UI.Controllers
             }
              
         }
+
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return View();
+        }
     }
 }
