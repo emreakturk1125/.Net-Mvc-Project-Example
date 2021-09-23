@@ -9,8 +9,8 @@ namespace MvcProject.Business.Abstract
 {
     public interface IMessageService
     {
-        List<Message> GetMessageInboxListBL();
-        List<Message> GetMessageSendListBL();
+        List<Message> GetMessageInboxListBL(string email);
+        List<Message> GetMessageSendboxListBL(string email);
         List<Message> GetMessageDraftListBL();
         void MessageAddBL(Message item);
         Message GetMessageByIdBL(int messageId);

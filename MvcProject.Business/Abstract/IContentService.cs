@@ -9,7 +9,7 @@ namespace MvcProject.Business.Abstract
 {
     public interface IContentService
     {
-        List<Content> GetContentListBL();
+        List<Content> GetContentListBL(string filter);
         List<Content> GetContentListByWriterIdBL(int writerId);
         List<Content> GetContentListByHeadingIdBL(int headingId);
         void ContentAddBL(Content item);

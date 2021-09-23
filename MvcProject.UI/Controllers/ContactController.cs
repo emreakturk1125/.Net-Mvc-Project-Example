@@ -16,7 +16,8 @@ namespace MvcProject.UI.Controllers
         ContactValidator cv = new ContactValidator();
         public ActionResult Index()
         {
-            var inboxValues = mm.GetMessageInboxListBL();
+            string param = (string)Session["WriterMail"];
+            var inboxValues = mm.GetMessageInboxListBL(param);
             return View(inboxValues);
         }
 

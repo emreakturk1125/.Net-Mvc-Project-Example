@@ -16,6 +16,12 @@ namespace MvcProject.UI.Controllers
             return View();
         }
 
+        public ActionResult GetAllContent(string filter)
+        {
+            var values = cm.GetContentListBL(filter);
+            return View(values);
+        }
+
         [HttpGet]
         public ActionResult ContentByHeading(int id)
         {

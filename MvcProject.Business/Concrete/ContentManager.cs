@@ -37,9 +37,9 @@ namespace MvcProject.Business.Concrete
             throw new NotImplementedException();
         }
 
-        public List<Content> GetContentListBL()
+        public List<Content> GetContentListBL(string filter)
         {
-            return _contentDal.List();
+            return _contentDal.List(x => x.ContentValue.Contains(filter) || String.IsNullOrEmpty(filter));
         }
 
         public List<Content> GetContentListByHeadingIdBL(int headingId)

@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Result Visualization</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/Content/GoogleChartContent/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: '@Url.Action("CategoryChart", "Chart")',
+                success: function (result) {
+                    google.charts.load('current', {
+                        'packages': ['corechart']
+                    });
+                    google.charts.setOnLoadCallback(function () {
+                        drawChart(result);
+                    });
+                }
+            });
+
+                $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: '@Url.Action("ProductChart", "Chart")',
+                success: function (result) {
+                    google.charts.load('current', {
+                        'packages': ['corechart']
+                    });
+                    google.charts.setOnLoadCallback(function () {
+                        drawChart1(result);
+                    });
+                }
+            });
+        });
+
+        function drawChart(result) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'CategoryName');
+            data.addColumn('number', 'CategoryCount');
+            var dataArray = [];
+
+            $.each(result, function (i, obj) {
+                dataArray.push([obj.CategoryName, obj.CategoryCount]);
+            });
+            data.addRows(dataArray);
+
+            var columnChartOptions = {
+                title: "Kategori Grafiği",
+                width: 400,
+                height: 400,
+                bar: { groupWidth: "20%" },
+            };
+
+            var columnChart = new google.visualization.PieChart(document
+                .getElementById('Piechart_div'));
+
+            columnChart.draw(data, columnChartOptions);
+        }
+
+        function drawChart1(result) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'ProductName');
+            data.addColumn('number', 'ProductCount');
+            var dataArray = [];
+
+            $.each(result, function (i, obj) {
+                dataArray.push([obj.ProductName, obj.ProductCount]);
+            });
+            data.addRows(dataArray);
+
+            var columnChartOptions = {
+                title: "Ürün Grafiği",
+                width: 400,
+                height: 400,
+                bar: { groupWidth: "20%" },
+            };
+
+            var columnChart = new google.visualization.PieChart(document
+                .getElementById('Piechart_div1'));
+
+            columnChart.draw(data, columnChartOptions);
+        }
+    </script>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <td>
+                <div id="Piechart_div"></div>
+            </td>
+            <td>
+                <div id="Piechart_div1"></div>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

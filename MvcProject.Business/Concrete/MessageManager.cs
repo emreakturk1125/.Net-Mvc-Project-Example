@@ -27,14 +27,14 @@ namespace MvcProject.Business.Concrete
             return _messageDal.List(x =>  x.IsDraft == true);
         }
 
-        public List<Message> GetMessageInboxListBL()
+        public List<Message> GetMessageInboxListBL(string email)
         {
-            return _messageDal.List(x => x.ReceiverMail == "admin@gmail.com" && x.IsDraft == false);
+            return _messageDal.List(x => x.ReceiverMail == email && x.IsDraft == false);
         }
 
-        public List<Message> GetMessageSendListBL()
+        public List<Message> GetMessageSendboxListBL(string email)
         {
-            return _messageDal.List(x => x.SenderMail == "admin@gmail.com" && x.IsDraft == false);
+            return _messageDal.List(x => x.SenderMail == email && x.IsDraft == false);
 
         }
 

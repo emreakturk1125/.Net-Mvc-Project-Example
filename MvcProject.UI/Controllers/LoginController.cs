@@ -16,7 +16,7 @@ namespace MvcProject.UI.Controllers
     public class LoginController : Controller
     {
         AdminManager am = new AdminManager(new EfAdminDal());
-        WriterManager wm = new WriterManager(new EfWriterDal());
+        WriterLoginManager wlm = new WriterLoginManager(new EfWriterDal());
 
         [HttpGet]
         public ActionResult Index()
@@ -67,7 +67,7 @@ namespace MvcProject.UI.Controllers
         public ActionResult WriterLogin(Writer item)
         {
 
-            var writerInfo = wm.GetWriterBL(item);
+            var writerInfo = wlm.GetWriterBL(item.WriterMail, item.WriterPassword);
             if (writerInfo != null)
             {
                 FormsAuthentication.SetAuthCookie(writerInfo.WriterMail, false);
@@ -87,7 +87,7 @@ namespace MvcProject.UI.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return View();
+            return RedirectToAction("Login","WriterLogin");
         }
     }
 }

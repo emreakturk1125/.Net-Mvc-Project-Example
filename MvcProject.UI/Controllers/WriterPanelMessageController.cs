@@ -14,6 +14,7 @@ namespace MvcProject.UI.Controllers
     public class WriterPanelMessageController : Controller
     {
         MessageManager mm = new MessageManager(new EfMessageDal());
+        WriterManager wm = new WriterManager(new EfWriterDal());
 
         public ActionResult Index()
         {
@@ -22,13 +23,15 @@ namespace MvcProject.UI.Controllers
 
         public ActionResult Inbox()
         {
-            var messageList = mm.GetMessageInboxListBL();
+            string param = (string)Session["WriterMail"]; 
+            var messageList = mm.GetMessageInboxListBL(param);
             return View(messageList);
         }
 
         public ActionResult Sendbox()
         {
-            var messageList = mm.GetMessageSendListBL();
+            string param = (string)Session["WriterMail"];
+            var messageList = mm.GetMessageSendboxListBL(param);
             return View(messageList);
         }
 
@@ -55,10 +58,11 @@ namespace MvcProject.UI.Controllers
         {
             MessageValidator messageValidator = new MessageValidator();
             ValidationResult result = messageValidator.Validate(item);
+            string param = (string)Session["WriterMail"];
 
             if (result.IsValid)
             {
-                item.SenderMail = "admin@gmail.com";
+                item.SenderMail = param;
                 item.MessageDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
                 mm.MessageAddBL(item);
                 return RedirectToAction("Sendbox");

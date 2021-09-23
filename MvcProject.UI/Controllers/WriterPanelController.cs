@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using FluentValidation.Results;
+using MvcProject.Business.ValidationRules;
 
 namespace MvcProject.UI.Controllers
 {
@@ -17,11 +19,36 @@ namespace MvcProject.UI.Controllers
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
         WriterManager wm = new WriterManager(new EfWriterDal());
 
-        // GET: WriterPanel
+        [HttpGet]
         public ActionResult WriterProfile()
         {
+            string param = (string)Session["WriterMail"];
+            int writerId = wm.GetWriterByEmailBL(param).WriterId;
+            var writerValue = wm.GetWriterByIdBL(writerId);
+            return View(writerValue);
+        }
+         
+        [HttpPost]
+        public ActionResult WriterProfile(Writer item)
+        {
+            WriterValidator writerValidator = new WriterValidator();
+            ValidationResult result = writerValidator.Validate(item);
+
+            if (result.IsValid)
+            {
+                wm.WriterUpdateBL(item);
+                return RedirectToAction("AllHeading","WriterPanel");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+            }
             return View();
         }
+
 
         [HttpGet]
         public ActionResult MyHeading()
@@ -92,8 +119,11 @@ namespace MvcProject.UI.Controllers
             return RedirectToAction("MyHeading");
         }
 
-        // Paging İşlemi için NuGet den PagedList ve PagedList.Mvc kütüphaneleri proje referanslarına eklenir.
-
+        /// <summary>
+        /// Paging İşlemi için NuGet den PagedList ve PagedList.Mvc kütüphaneleri proje referanslarına eklenir. View sayfasında da işlemler var
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public ActionResult AllHeading(int param = 1)
         {
             var headingList = hm.GetHeadingListBL().ToPagedList(param,2);

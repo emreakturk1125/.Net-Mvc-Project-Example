@@ -17,13 +17,15 @@ namespace MvcProject.UI.Controllers
 
         public ActionResult Inbox()
         {
-            var messageList = mm.GetMessageInboxListBL();
+            string param = (string)Session["WriterMail"];
+            var messageList = mm.GetMessageInboxListBL(param);
             return View(messageList);
         }
 
         public ActionResult Sendbox()
         {
-            var messageList = mm.GetMessageSendListBL();
+            string param = (string)Session["WriterMail"];
+            var messageList = mm.GetMessageSendboxListBL(param);
             return View(messageList);
         }
 
@@ -76,12 +78,14 @@ namespace MvcProject.UI.Controllers
 
         public int InboxCount()
         {
-            return  mm.GetMessageInboxListBL().Count;
+            string param = (string)Session["WriterMail"];
+            return  mm.GetMessageInboxListBL(param).Count;
         }
 
         public int SendboxCount()
         {
-            return mm.GetMessageSendListBL().Count;
+            string param = (string)Session["WriterMail"];
+            return mm.GetMessageSendboxListBL(param).Count;
         }
 
         public int DraftCount()
